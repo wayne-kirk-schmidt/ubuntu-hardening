@@ -1,4 +1,4 @@
-# DATACLEAR sample ssh configuration file
+# HARDENED sample ssh configuration file
 X11Forwarding no
 UsePrivilegeSeparation yes
 UsePAM no
@@ -36,4 +36,4 @@ ClientAliveCountMax 3
 ChallengeResponseAuthentication no
 AddressFamily inet
 AcceptEnv LANG LC_*
-# DATACLEAR sample ssh configuration file
+# HARDENED sample ssh configuration file

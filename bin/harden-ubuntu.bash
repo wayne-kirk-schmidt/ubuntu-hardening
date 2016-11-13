@@ -255,7 +255,7 @@ secure_shared_memory () {
 make_admin_group () {
 
   ${verboseflag}
-  admgroup="dclearadm"
+  admgroup="secadm"
   groupcheck=$( compgen -g | egrep -i $admgroup | wc -l ) 
   [ $groupcheck -lt 1 ] && sudo groupadd $admgroup
 
@@ -294,7 +294,7 @@ harden_sysctl () {
   [ -f $cfgfiledst ] && {
     [ ! -f $cfgfilebkp ] && cp -p $cfgfiledst $cfgfilebkp
     [ -f $cfgfilesrc ] && {
-      [ $( cat $cfgfiledst | egrep -i DATACLEAR | wc -l ) -lt 1 ] && {
+      [ $( cat $cfgfiledst | egrep -i HARDENED | wc -l ) -lt 1 ] && {
         cat $cfgfilesrc >> $cfgfiledst
         chmod 644 $cfgfiledst
         sudo sysctl -p
