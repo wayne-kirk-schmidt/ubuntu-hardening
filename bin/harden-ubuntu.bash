@@ -276,8 +276,11 @@ harden_sshd_config () {
   [ -f $cfgfiledst ] && {
     [ ! -f $cfgfilebkp ] && cp -p $cfgfiledst $cfgfilebkp
     [ -f $cfgfilesrc ] && {
+      candidate=$( cat $cfgfiledst | egrep -i HARDENED | wc -l )
+      [ $candidate -lt 1 ] && {
 	# cp -p $cfgfilesrc $cfgfiledst
 	chmod 644 $cfgfiledst
+      }
     }
   }
 }
@@ -289,13 +292,14 @@ harden_sysctl () {
 
   ${verboseflag}
 
-  cfgfiledst="/etc/systctl.conf"
+  cfgfiledst="/etc/sysctl.conf"
   cfgfilesrc="$cfgdir/sysctl.conf.harden"
   cfgfilebkp="$cfgdir/sysctl.conf.master"
   [ -f $cfgfiledst ] && {
     [ ! -f $cfgfilebkp ] && cp -p $cfgfiledst $cfgfilebkp
     [ -f $cfgfilesrc ] && {
-      [ $( cat $cfgfiledst | egrep -i HARDENED | wc -l ) -lt 1 ] && {
+      candidate=$( cat $cfgfiledst | egrep -i HARDENED | wc -l )
+      [ $candidate -lt 1 ] && {
         cat $cfgfilesrc >> $cfgfiledst
         chmod 644 $cfgfiledst
         sudo sysctl -p
