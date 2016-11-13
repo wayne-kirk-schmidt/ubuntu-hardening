@@ -2,9 +2,9 @@
 ###
 ### SCRIPTNAME [ options ] a script to harden Ubuntu Operating System
 ###
-###	-h | --help			display this message and exit
-###	-v | --verbose		run the script verbosely ( for debugging purposes ) 
-###	-c | --checksum 	run a checksum on the script, display it, and exit
+###	-h | --help		display this message and exit
+###	-v | --verbose		run verbosely for debugging purposes
+###	-c | --checksum 	checksum script, display it, and exit
 ###
 ### The script is currently run from: BASEDIR
 ### The script install files into the following:
@@ -55,7 +55,7 @@ display_help () {
 # This is a boilerplate function that sets permissions on file creation
 # path, and the executable to use for the checksums, among others. 
 # This is where global variables should be set to be used for the script
-# If the checksumflag is set, the script sums itself, prints the sum, and exits.
+# If checksumflag is set, the script sums itself, prints the sum, and exits.
 #
 
 initialize_variables () {
