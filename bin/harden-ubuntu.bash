@@ -147,6 +147,7 @@ copy_files () {
         [ $srcsum != $dstsum ] && cp -f $srcfile $dstfile 
       }
     }
+    find $tmpdir -name "*.harden" -exec cp {} $cfgdir \;
   }
 }
 
@@ -289,8 +290,8 @@ harden_sysctl () {
   ${verboseflag}
 
   cfgfiledst="/etc/systctl.conf"
-  cfgfilesrc="$cfgdir/sysctl.harden"
-  cfgfilebkp="$cfgdir/sysctl.master"
+  cfgfilesrc="$cfgdir/sysctl.conf.harden"
+  cfgfilebkp="$cfgdir/sysctl.conf.master"
   [ -f $cfgfiledst ] && {
     [ ! -f $cfgfilebkp ] && cp -p $cfgfiledst $cfgfilebkp
     [ -f $cfgfilesrc ] && {
