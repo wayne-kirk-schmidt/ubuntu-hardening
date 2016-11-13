@@ -186,14 +186,14 @@ turn_on_firewall () {
   pkgcount=$( dpkg --list | egrep -i 'ufw' | wc -l )
   [ $pkgcount -lt 1 ] && {
     {
-      sudo apt-get install ufw
+      sudo apt-get install ufw -y
     } 2>$logfile 1>&2
   }
 
   pkgcount=$( dpkg --list | egrep -i 'ufw' | wc -l )
   [ $pkgcount -lt 1 ] && {
     {
-      sudo apt-get install fail2ban
+      sudo apt-get install fail2ban -y
       sudo systemctl start fail2ban
       sudo systemctl enable fail2ban
     } 2>$logfile 1>&2
@@ -331,7 +331,7 @@ setup_app_armor () {
   pkgcount=$( dpkg --list | egrep -i 'apparmor' | wc -l )
   [ $pkgcount -lt 1 ] && {
     {
-      sudo apt-get install apparmor apparmor-profiles
+      sudo apt-get install apparmor apparmor-profiles -y
     } 2>$logfile 1>&2
   }
 
@@ -344,24 +344,17 @@ setup_rootkit_checks () {
 
   ${verboseflag}
 
-  pkgcount=$( dpkg --list | egrep -i 'apparmor' | wc -l )
-  [ $pkgcount -lt 1 ] && {
-    {
-      sudo apt-get install apparmor apparmor-profiles
-    } 2>$logfile 1>&2
-  }
-
   pkgcount=$( dpkg --list | egrep -i 'chkrootkit' | wc -l )
   [ $pkgcount -lt 1 ] && {
     {
-      sudo apt-get install chkrootkit
+      sudo apt-get install chkrootkit -y
     } 2>$logfile 1>&2
   }
 
   pkgcount=$( dpkg --list | egrep -i 'rkhunter' | wc -l )
   [ $pkgcount -lt 1 ] && {
     {
-      sudo apt-get install rkhunter
+      sudo apt-get install rkhunter -y
       sudo rkhunter --update
       sudo rkhunter --propupd
       sudo rkhunter --check
