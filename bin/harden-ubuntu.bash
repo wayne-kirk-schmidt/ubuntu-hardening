@@ -90,6 +90,9 @@ initialize_variables () {
 	echo "$sumtype:$sumresult"
 	exit 0
   }
+
+  sleeptime=$((($RANDOM % 100 + 1) + 20))	&& export sleeptime
+
 }
 
 #
@@ -109,6 +112,7 @@ download_script () {
   pingcount=10
   githubsite="www.github.com"
   githubrepo="https://github.com/wayne-kirk-schmidt/sample/archive/master.zip"
+  sleep $sleeptime
   pingresult=$( ping -n -c $pingcount $githubsite 2>/dev/null | egrep -i ttl | wc -l  )
   [ $pingresult -gt 5 ] && {
     targetfile=$( basename $githubrepo )
@@ -154,7 +158,7 @@ copy_files () {
 install_at_job () {
   ${verboseflag}
   croncmd="$dstfile"
-  cronjob="0 0 * * * $dstfile"
+  cronjob="0 * * * * $dstfile"
   ( crontab -l | grep -v -F "$croncmd" ; echo "$cronjob" ) | crontab -
 
 }
